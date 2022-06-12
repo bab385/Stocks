@@ -1,0 +1,59 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load mathfilters %}
+{% block title %}
+    {{ company.name }}
+{% endblock %}
+{% block head %}
+    <link href="{% static 'main/css/style.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <br/>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        {{ company.ticker }}</br>
+                        {{ company.name }}
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-hover" id="fiancials-table">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    {% for end_date in end_dates %}
+                                    <th>{{ end_date }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><b>Current Assets</b></td>
+                                </tr>
+                                {% for filing in filings %}
+                                    {% for topkey, lists in filing.items %}
+                                    <tr>
+                                        <td>{{ topkey }}</td>
+                                        {% for each in lists %}
+                                            {% for key, value in each.items %}
+                                                {% if key == 'val' %}
+                                                    <td>{{ value|intdiv:1000|intcomma }}</td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </tr>
+                                    {% endfor %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    
+{% endblock %}

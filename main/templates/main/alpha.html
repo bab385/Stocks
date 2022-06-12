@@ -1,0 +1,71 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+    Stocks
+{% endblock %}
+{% block head %}
+    <link href="{% static 'main/css/style.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <br/>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-header">
+                        {{ stock_data.symbol }}
+                    </div>
+                    <div class="card-body">
+                        <label for="stock-symbol" class="form-label">Stock Symbol:</label>
+                        <input class="form-control" type="text" id="stock-symbol"></input><br/>
+                        <button class="btn btn-primary btn-sm" type="button" id="stock-button">Enter</button><br/><br/>
+                        <table class="table table-bordered table-striped table-hover" id="stock-table">
+                            <thead>
+                            </thead>
+                            <tbody id="stock-table-body">
+                                <tr>
+                                    <td>Year Ending</td>
+                                    {% for data in stock_data.annualReports %}
+                                        <td>{{ data.fiscalDateEnding }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td>Revenue</td>
+                                    {% for data in stock_data.annualReports %}
+                                        <td>{{ data.totalRevenue|intcomma }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td>COGS</td>
+                                    {% for data in stock_data.annualReports %}
+                                        <td>{{ data.costofGoodsAndServicesSold|intcomma }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td>Gross Profit</td>
+                                    {% for data in stock_data.annualReports %}
+                                        <td>{{ data.grossProfit|intcomma }}</td>
+                                    {% endfor %}
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        {% comment %} {% for data in stock_data %}
+                            {{ data }}
+                        {% endfor %} {% endcomment %}
+                        {% for data in stock_data.annualReports %}
+                                {{ data.fiscalDateEnding }} 
+                            {% for line in data %}    
+                                {{ line }}</br>
+
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+{% endblock %}

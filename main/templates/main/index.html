@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}
+    Stocks
+{% endblock %}
+{% block head %}
+    <link href="{% static 'main/css/style.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <br/>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-body">
+                        <label for="stock-symbol" class="form-label">Stock Symbol:</label>
+                        <input class="form-control" type="text" id="stock-symbol"></input><br/>
+                        <button class="btn btn-primary btn-sm" type="button" id="stock-button">Enter</button><br/><br/>
+                        <table class="table table-bordered table-striped table-hover" id="stock-table">
+                            <thead>
+                                <th>Stocks</th>
+                                <th>1</th>
+                            </thead>
+                            <tbody id="stock-table-body">
+                            </tbody>
+                        </table>
+                        {% for data in stock_data %}
+                            {{ data }}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'main/js/stock_table.js' %}"></script>
+{% endblock %}

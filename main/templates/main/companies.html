@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}
+    Stocks
+{% endblock %}
+{% block head %}
+    <link href="{% static 'main/css/style.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <br/>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-bordered table-striped table-hover" id="company-table">
+                            <thead>
+                                <th>Ticker Symbol</th>
+                                <th>Company Name</th>
+                                <th>CIK</th>
+                            </thead>
+                            <tbody id="company-table-body">
+                                {% for company in companies %}
+                                    <tr>
+                                        <td><a href="{% url 'financials' company.id %}">{{ company.ticker }}</a></td>
+                                        <td>{{ company.name }}</td>
+                                        <td>{{ company.cik }}</td>
+                                    </tr>
+                                {% endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'main/js/stock_table.js' %}"></script>
+{% endblock %}
