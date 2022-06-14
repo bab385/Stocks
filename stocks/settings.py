@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'main.apps.MainConfig',
+    'data.apps.DataConfig',
     'corsheaders',
 
     'django_extensions',
